@@ -135,6 +135,7 @@
                     </view>
                     <navigationItem key="navigationItem" title="Yelp" id="vXI-3A-qQ7">
                         <barButtonItem key="leftBarButtonItem" title="Filters" id="fz0-fY-6ZS">
+                            <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             <connections>
                                 <segue destination="4fc-iU-e3k" kind="presentation" id="4rh-PC-PVt"/>
                             </connections>
@@ -209,11 +210,13 @@
                     </view>
                     <navigationItem key="navigationItem" title="Filters" id="I6g-Jt-qLa">
                         <barButtonItem key="leftBarButtonItem" title="Cancel" id="5X4-QD-puM">
+                            <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             <connections>
                                 <action selector="onCancel:" destination="zfy-GH-mCD" id="eEM-r0-mXd"/>
                             </connections>
                         </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" title="Search" id="WiW-hD-x04">
+                            <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             <connections>
                                 <action selector="onSearch:" destination="zfy-GH-mCD" id="QUT-53-Ulu"/>
                             </connections>
@@ -235,6 +238,9 @@
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="kfg-xD-z8g">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
+                        <color key="backgroundColor" red="0.87058823529999996" green="0.22352941179999999" blue="0.1764705882" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="tintColor" red="0.87058823529999996" green="0.22352941179999999" blue="0.1764705882" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="barTintColor" red="0.87058823529411766" green="0.22352941176470587" blue="0.1803921568627451" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>
@@ -253,6 +259,10 @@
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="j6a-sq-lLQ">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
+                        <color key="barTintColor" red="0.87058823529999996" green="0.22352941179999999" blue="0.1764705882" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <textAttributes key="titleTextAttributes">
+                            <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        </textAttributes>
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>
@@ -264,4 +274,5 @@
             <point key="canvasLocation" x="3650.4000000000001" y="339.58020989505252"/>
         </scene>
     </scenes>
+    <color key="tintColor" red="0.87058823529411766" green="0.22352941176470587" blue="0.1803921568627451" alpha="1" colorSpace="calibratedRGB"/>
 </document>

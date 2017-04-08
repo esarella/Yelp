@@ -11,7 +11,6 @@ import UIKit
 class BusinessesViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate, FiltersViewControllerDelegate {
     
     var businesses: [Business]!
-    //    var filteredBusinnesses: [Business]!
     @IBOutlet weak var tableView: UITableView!
     
     override func viewDidLoad() {
@@ -32,7 +31,6 @@ class BusinessesViewController: UIViewController, UITableViewDelegate, UITableVi
             
             self.businesses = businesses
             if let businesses = businesses {
-                //                self.filteredBusinnesses = businesses
                 self.tableView.reloadData()
                 
                 for business in businesses {
@@ -40,10 +38,7 @@ class BusinessesViewController: UIViewController, UITableViewDelegate, UITableVi
                     print(business.address!)
                 }
             }
-            
-            
-        }
-        )
+        })
         
         /* Example of Yelp search with more search options specified
          Business.searchWithTerm("Restaurants", sort: .Distance, categories: ["asianfusion", "burgers"], deals: true) { (businesses: [Business]!, error: NSError!) -> Void in
@@ -55,9 +50,7 @@ class BusinessesViewController: UIViewController, UITableViewDelegate, UITableVi
          }
          }
          */
-        
-        
-        
+
     }
     
     override func didReceiveMemoryWarning() {
@@ -90,18 +83,16 @@ class BusinessesViewController: UIViewController, UITableViewDelegate, UITableVi
         
         Business.searchWithTerm(term: searchText, completion: { (businesses: [Business]?, error: Error?) -> Void in
             
-            self.businesses = businesses
-            if let businesses = businesses {
-                self.tableView.reloadData()
-                
-                //                            for business in businesses {
-                //                                print(business.name!)
-                //                                print(business.address!)
-                //                            }
-            }
+            self.businesses = businesses!
+            self.tableView.reloadData()
+//            if let businesses = businesses
+//                            for business in businesses {
+//                                print(business.name!)
+//                                print(business.address!)
+//                            }
+//            }
             
-        }
-        )
+        })
     }
     
      // MARK: - Navigation
