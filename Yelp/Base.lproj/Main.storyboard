@@ -197,6 +197,54 @@
                                             <outlet property="switchLabel" destination="q0S-oJ-PdO" id="88b-Uh-Rr5"/>
                                         </connections>
                                     </tableViewCell>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="SeeAllCell" id="E0c-Nv-ggC">
+                                        <rect key="frame" x="0.0" y="108" width="375" height="85"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="E0c-Nv-ggC" id="rfy-TY-kT8">
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="85"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="See All" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hS0-eg-t8V">
+                                                    <rect key="frame" x="161" y="32" width="53" height="21"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="hS0-eg-t8V" firstAttribute="centerY" secondItem="rfy-TY-kT8" secondAttribute="centerY" id="7Vk-2R-hZp"/>
+                                                <constraint firstItem="hS0-eg-t8V" firstAttribute="centerX" secondItem="rfy-TY-kT8" secondAttribute="centerX" id="QuE-Uw-iKg"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="ExpandableCell" id="f7C-Oa-mnG" customClass="ExpandableCell" customModule="Yelp" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="193" width="375" height="85"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="f7C-Oa-mnG" id="clw-K8-bEE">
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="85"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oNg-Oa-1PU">
+                                                    <rect key="frame" x="8" y="32" width="42" height="21"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="down-arrow" translatesAutoresizingMaskIntoConstraints="NO" id="Gsj-Ak-XC7">
+                                                    <rect key="frame" x="299" y="21" width="32" height="43"/>
+                                                </imageView>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="oNg-Oa-1PU" firstAttribute="leading" secondItem="clw-K8-bEE" secondAttribute="leading" constant="8" id="3DI-as-J8I"/>
+                                                <constraint firstItem="oNg-Oa-1PU" firstAttribute="centerY" secondItem="clw-K8-bEE" secondAttribute="centerY" id="LIF-Aj-AGc"/>
+                                                <constraint firstAttribute="trailingMargin" secondItem="Gsj-Ak-XC7" secondAttribute="trailing" constant="36" id="bHp-7m-46D"/>
+                                                <constraint firstItem="oNg-Oa-1PU" firstAttribute="centerY" secondItem="Gsj-Ak-XC7" secondAttribute="centerY" id="tz9-Ie-Fi6"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="expandableCellLabel" destination="oNg-Oa-1PU" id="BdC-Lp-af1"/>
+                                        </connections>
+                                    </tableViewCell>
                                 </prototypes>
                             </tableView>
                         </subviews>
@@ -274,5 +322,8 @@
             <point key="canvasLocation" x="3650.4000000000001" y="339.58020989505252"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="down-arrow" width="64" height="64"/>
+    </resources>
     <color key="tintColor" red="0.87058823529411766" green="0.22352941176470587" blue="0.1803921568627451" alpha="1" colorSpace="calibratedRGB"/>
 </document>

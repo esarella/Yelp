@@ -131,11 +131,10 @@ class FiltersViewController: UIViewController, UITableViewDelegate, UITableViewD
 
         case FilterSection.distance:
             if !distanceExpanded && 0 == indexPath.row {
-//                let cell = tableView.dequeueReusableCell(withIdentifier: "DropdownCell", for: indexPath) as! DropdownCell
-                let cell = tableView.dequeueReusableCell(withIdentifier: "SwitchCell", for: indexPath) as! SwitchCell
+                let cell = tableView.dequeueReusableCell(withIdentifier: "ExpandableCell", for: indexPath) as! ExpandableCell
                 for (row, isSelected) in distanceStates {
                     if isSelected {
-//                        cell.dropdownLabel.text = distances[row]["name"] as? String
+                        cell.expandableCellLabel.text = distances[row]["name"] as? String
                         break
                     }
                 }
@@ -150,11 +149,10 @@ class FiltersViewController: UIViewController, UITableViewDelegate, UITableViewD
 
         case FilterSection.sort:
             if !sortExpanded && 0 == indexPath.row {
-//                let cell = tableView.dequeueReusableCell(withIdentifier: "DropdownCell", for: indexPath) as! DropdownCell
-                let cell = tableView.dequeueReusableCell(withIdentifier: "SwitchCell", for: indexPath) as! SwitchCell
+                let cell = tableView.dequeueReusableCell(withIdentifier: "ExpandableCell", for: indexPath) as! ExpandableCell
                 for (row, isSelected) in sortStates {
                     if isSelected {
-//                        cell.dropdownLabel.text = sorts[row]["name"] as? String
+                        cell.expandableCellLabel.text = sorts[row]["name"] as? String
                         break
                     }
                 }
@@ -169,8 +167,8 @@ class FiltersViewController: UIViewController, UITableViewDelegate, UITableViewD
 
         case FilterSection.categories:
             if !categoriesExpanded && 4 == indexPath.row {
-//                let cell = tableView.dequeueReusableCell(withIdentifier: "SeeAllCell", for: indexPath)
-                let cell = tableView.dequeueReusableCell(withIdentifier: "SwitchCell", for: indexPath)
+                let cell = tableView.dequeueReusableCell(withIdentifier: "SeeAllCell", for: indexPath)
+//                let cell = tableView.dequeueReusableCell(withIdentifier: "SwitchCell", for: indexPath)
                 return cell
             }
 
@@ -223,6 +221,49 @@ class FiltersViewController: UIViewController, UITableViewDelegate, UITableViewD
         case FilterSection.categories:
             categoryStates[indexPath.row] = value
         }
+    }
+    
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        if " " != self.tableView(tableView, titleForHeaderInSection: section) {
+            return 45
+        }
+        return 8
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        // Deselect row appearance after it has been selected
+        tableView.deselectRow(at: indexPath, animated: true)
+        
+        let cell = self.tableView(tableView, cellForRowAt: indexPath)
+        if "SeeAllCell" == cell.reuseIdentifier {
+            categoriesExpanded = true
+            tableView.reloadSections(NSIndexSet(index: FilterSection.categories.rawValue) as IndexSet, with: .none)
+            
+        } else if "ExpandableCell" == cell.reuseIdentifier {
+            switch FilterSection(rawValue:indexPath.section)! {
+            case FilterSection.distance:
+                distanceExpanded = true
+                tableView.reloadSections(NSIndexSet(index: FilterSection.distance.rawValue) as IndexSet, with: .none)
+            case FilterSection.sort:
+                sortExpanded = true
+                tableView.reloadSections(NSIndexSet(index: FilterSection.sort.rawValue) as IndexSet, with: .none)
+            default:
+                break
+            }
+        }
+    }
+    
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        guard nil != self.tableView(tableView, titleForHeaderInSection: section) else {
+            return nil
+        }
+        
+        let headerView = UIView(frame: CGRect(origin: CGPoint(x: 0, y: 0), size: CGSize(width: self.view.frame.width, height: 45)))
+        headerView.backgroundColor = UIColor.white
+        let label = UILabel(frame: CGRect(x: 0, y: 10, width: self.view.frame.width, height: 30))
+        label.text = self.tableView(tableView, titleForHeaderInSection: section)
+        headerView.addSubview(label)
+        return headerView
     }
 
 }
