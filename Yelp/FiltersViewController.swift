@@ -76,7 +76,7 @@ class FiltersViewController: UIViewController, UITableViewDelegate, UITableViewD
             }
         }
 
-        // Distance
+//        // Distance
 //        SearchSettings.sharedInstance.distance = maxDistance
 //        for (row, isSelected) in distanceStates {
 //            if isSelected {
@@ -195,6 +195,7 @@ class FiltersViewController: UIViewController, UITableViewDelegate, UITableViewD
             return " "
         }
     }
+    
 
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 50
