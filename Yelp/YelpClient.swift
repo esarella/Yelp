@@ -53,29 +53,22 @@ class YelpClient: BDBOAuth1RequestOperationManager, CLLocationManagerDelegate {
         let token = BDBOAuth1Credential(token: accessToken, secret: accessSecret, expiration: nil)
         self.requestSerializer.saveAccessToken(token)
     }
-    
-    
-//    func locationManager(manager: CLLocationManager!, didUpdateLocations locations: [AnyObject]!) {
-//        var userLocation:CLLocation = locations[0] as! CLLocation
-//        latitude = userLocation.coordinate.longitude;
-//        longitude = userLocation.coordinate.latitude;
-//    }
-
-    func searchWithTerm(_ term: String, completion: @escaping ([Business]?, Error?) -> Void) -> AFHTTPRequestOperation {
-        return searchWithTerm(term, sort: nil, categories: nil, deals: nil, completion: completion)
+    func searchWithTerm(_ term: String,
+                        completion: @escaping ([Business]?, Error?) -> Void) -> AFHTTPRequestOperation {
+        return searchWithTerm(term, sort: nil, categories: nil, deals: nil, distance: maxDistance, completion: completion)
     }
     
-    func searchWithTerm(_ term: String, sort: YelpSortMode?, categories: [String]?, deals: Bool?, completion: @escaping ([Business]?, Error?) -> Void) -> AFHTTPRequestOperation {
+    func searchWithTerm(_ term: String, sort: YelpSortMode?, categories: [String]?, deals: Bool?, distance: Double?,
+                        completion: @escaping ([Business]?, Error?) -> Void) -> AFHTTPRequestOperation {
+        return searchWithTerm(term, sort: sort, categories: categories, deals: deals, distance: distance, offset: 0, completion: completion)
+    }
+    
+    func searchWithTerm(_ term: String, sort: YelpSortMode?, categories: [String]?, deals: Bool?, distance: Double?, offset: Int?,
+                        completion: @escaping ([Business]?, Error?) -> Void) -> AFHTTPRequestOperation {
         // For additional parameters, see http://www.yelp.com/developers/documentation/v2/search_api
         
         // Default the location to San Francisco
-//        print("latitude: " + String(latitude))
-//        print("logitude: " + String(longitude))
-//        var parameters: [String : AnyObject] = ["term": term as AnyObject, "ll":
-//            String(latitude)+","+String(longitude) as AnyObject]
-        
-        var parameters: [String : AnyObject] = ["term": term as AnyObject, "ll": "37.785771,-122.406165" as AnyObject]
-
+        var parameters: [String: AnyObject] = ["term": term as AnyObject, "ll": "37.785771,-122.406165" as AnyObject]
         
         if sort != nil {
             parameters["sort"] = sort!.rawValue as AnyObject?
@@ -89,6 +82,14 @@ class YelpClient: BDBOAuth1RequestOperationManager, CLLocationManagerDelegate {
             parameters["deals_filter"] = deals! as AnyObject?
         }
         
+        if distance != nil {
+            parameters["radius_filter"] = distance! as AnyObject?
+        }
+        
+        if offset != nil {
+            parameters["offset"] = offset! as AnyObject?
+        }
+        
         print(parameters)
         
         return self.get("search", parameters: parameters,
@@ -99,9 +100,9 @@ class YelpClient: BDBOAuth1RequestOperationManager, CLLocationManagerDelegate {
                                     completion(Business.businesses(array: dictionaries!), nil)
                                 }
                             }
-                        },
+        },
                         failure: { (operation: AFHTTPRequestOperation?, error: Error) -> Void in
                             completion(nil, error)
-                        })!
+        })!
     }
 }
