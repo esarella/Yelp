@@ -104,15 +104,18 @@ class BusinessesViewController: UIViewController, UITableViewDelegate, UITableVi
         filtersViewController.delegate = self
     }
     
-    func filtersViewController(filtersViewController: FiltersViewController, didUpdateFilters filters: [String : AnyObject]) {
+    func filtersViewController(filtersViewController: FiltersViewController, didUpdateFilters filters: SearchSettings) {
         
-        var categories = filters["categories"] as! [String]
-        
-        Business.searchWithTerm(term: "Restaurants", sort: nil, categories: categories, deals: nil) { (businesses: [Business]!, error: Error!) in
-            self.businesses = businesses
-            self.tableView.reloadData()
-        }
+        let sort = SearchSettings.sharedInstance.sort
+        let deals = SearchSettings.sharedInstance.deals
+        let distance = SearchSettings.sharedInstance.distance
+        let categories = SearchSettings.sharedInstance.categories
+                
+        Business.searchWithTerm(term: "Restaurants", sort: sort, categories: categories, deals: deals, completion:
+            { (businesses: [Business]?, error: Error?) -> Void in
+                self.businesses = businesses!
+                self.tableView.reloadData()
+        })
     }
-    
     
 }
