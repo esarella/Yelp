@@ -9,6 +9,7 @@
 import UIKit
 import MapKit
 import MBProgressHUD
+import SVPullToRefresh
 
 class BusinessesViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate, FiltersViewControllerDelegate {
     
@@ -39,7 +40,18 @@ class BusinessesViewController: UIViewController, UITableViewDelegate, UITableVi
         tableView.delegate = self
         tableView.rowHeight = UITableViewAutomaticDimension
         tableView.estimatedRowHeight = 95
+        tableView.addPullToRefresh(actionHandler: { [weak self] in
+            self?.doNewSearch()
+        })
+        
+        self.tableView.pullToRefreshView.arrowColor = UIColor(red: 0.82, green: 0.13, blue: 0.13, alpha: 1)
+        self.tableView.pullToRefreshView.textColor = UIColor(red: 0.82, green: 0.13, blue: 0.13, alpha: 1)
 
+
+        tableView.addInfiniteScrolling(actionHandler: { [weak self] in
+            self?.doSearchWithOffset(self?.businesses?.count ?? 0, newSearch: false)
+        })
+        
         doNewSearch()
     }
     
@@ -126,11 +138,16 @@ class BusinessesViewController: UIViewController, UITableViewDelegate, UITableVi
                                             }
                                         }
                                         
-                                        self.tableView.reloadData()
                                     }
                                     
                                     self.isLoading = false
                                     MBProgressHUD.hideAllHUDs(for: self.view, animated: true);
+                                    self.tableView.pullToRefreshView.stopAnimating()
+                                    self.tableView.infiniteScrollingView.stopAnimating()
+                                    self.tableView.reloadData()
+
+
+
         })
     }
 
