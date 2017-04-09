@@ -41,12 +41,12 @@ final class SearchSettings {
     }
     
     static func distanceOptions() -> [[String:AnyObject]] {
-        return [
-            ["name" : "Auto" as AnyObject, "radius": 0 as AnyObject],
-            ["name" : "0.5 miles" as AnyObject, "radius": 1000 as AnyObject],
-            ["name" : "1 mile" as AnyObject, "radius": 2000 as AnyObject],
-            ["name" : "6 miles" as AnyObject, "radius": 10000 as AnyObject],
-            ["name" : "25 miles" as AnyObject, "radius": 40000 as AnyObject]
+        let metersPerMile = 1/0.000621371
+        return [["name": "Auto" as AnyObject, "meters": maxDistance as AnyObject],
+                ["name": "0.3 miles" as AnyObject, "meters": 0.3 * metersPerMile as AnyObject],
+                ["name": "1 mile" as AnyObject, "meters": metersPerMile as AnyObject],
+                ["name": "5 miles" as AnyObject, "meters": 5 * metersPerMile as AnyObject],
+                ["name": "20 miles" as AnyObject, "meters": 20 * metersPerMile as AnyObject]
         ]
     }
     

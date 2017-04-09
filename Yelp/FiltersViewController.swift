@@ -76,14 +76,14 @@ class FiltersViewController: UIViewController, UITableViewDelegate, UITableViewD
             }
         }
 
-//        // Distance
-//        SearchSettings.sharedInstance.distance = maxDistance
-//        for (row, isSelected) in distanceStates {
-//            if isSelected {
-//                SearchSettings.sharedInstance.distance = distances[row]["meters"] as! Double
-//                break
-//            }
-//        }
+        // Distance
+        SearchSettings.sharedInstance.distance = maxDistance
+        for (row, isSelected) in distanceStates {
+            if isSelected {
+                SearchSettings.sharedInstance.distance = distances[row]["meters"] as! Double
+                break
+            }
+        }
 
         // Categories
         var selectedCategories = [String]()
