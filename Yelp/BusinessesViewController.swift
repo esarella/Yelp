@@ -18,8 +18,8 @@ class BusinessesViewController: UIViewController, UITableViewDelegate, UITableVi
     
     // Infinite loading variables
     var isLoading = false
-    var offset: Int = 0
-    var limit: Int = 20 // Default Yelp limit
+//    var offset: Int = 0
+//    var limit: Int = 20 // Default Yelp limit
     
     
     @IBOutlet weak var tableView: UITableView!
@@ -34,18 +34,13 @@ class BusinessesViewController: UIViewController, UITableViewDelegate, UITableVi
         searchBar.sizeToFit()
         navigationItem.titleView = searchBar
         searchBar.delegate = self
-        doNewSearch()
 
         tableView.dataSource = self
         tableView.delegate = self
         tableView.rowHeight = UITableViewAutomaticDimension
         tableView.estimatedRowHeight = 95
 
-    }
-    
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+        doNewSearch()
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -69,21 +64,12 @@ class BusinessesViewController: UIViewController, UITableViewDelegate, UITableVi
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         
         Business.searchWithTerm(term: searchText, completion: { (businesses: [Business]?, error: Error?) -> Void in
-            
             self.businesses = businesses!
             self.tableView.reloadData()
-//            if let businesses = businesses
-//                            for business in businesses {
-//                                print(business.name!)
-//                                print(business.address!)
-//                            }
-//            }
-            
         })
     }
     
      // MARK: - Navigation
-     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         let navigationController = segue.destination as! UINavigationController
         let filtersViewController = navigationController.topViewController as! FiltersViewController

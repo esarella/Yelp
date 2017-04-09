@@ -37,8 +37,6 @@ class FiltersViewController: UIViewController, UITableViewDelegate, UITableViewD
     var sortExpanded: Bool = false
     var categoriesExpanded: Bool = false
 
-    let HeaderViewIdentifier = "TableViewHeaderView"
-
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -48,8 +46,10 @@ class FiltersViewController: UIViewController, UITableViewDelegate, UITableViewD
         distances = SearchSettings.distanceOptions()
         sorts = SearchSettings.sortOptions()
         categories = SearchSettings.yelpCategories()
-
-        tableView.register(UITableViewHeaderFooterView.self, forHeaderFooterViewReuseIdentifier: HeaderViewIdentifier)
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        SearchSettings.sharedInstance.resetFiltersForNewSearch()
     }
 
     override func didReceiveMemoryWarning() {
@@ -168,7 +168,6 @@ class FiltersViewController: UIViewController, UITableViewDelegate, UITableViewD
         case FilterSection.categories:
             if !categoriesExpanded && 4 == indexPath.row {
                 let cell = tableView.dequeueReusableCell(withIdentifier: "SeeAllCell", for: indexPath)
-//                let cell = tableView.dequeueReusableCell(withIdentifier: "SwitchCell", for: indexPath)
                 return cell
             }
 
