@@ -43,7 +43,6 @@ class BusinessesViewController: UIViewController, UITableViewDelegate, UITableVi
         self.tableView.pullToRefreshView.textColor = UIColor(red: 0.82, green: 0.13, blue: 0.13, alpha: 1)
         //        self.tableView.backgroundColor = UIColor.init(patternImage: #imageLiteral(resourceName: "down-arrow"))
         
-        
         tableView.addInfiniteScrolling(actionHandler: { [weak self] in
             self?.doSearchWithOffset(self?.businesses?.count ?? 0, newSearch: false)
         })
@@ -53,18 +52,31 @@ class BusinessesViewController: UIViewController, UITableViewDelegate, UITableVi
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if let businesses = businesses {
+            if (businesses.count > 0) {
             return businesses.count
+            }
+            else {
+                return 1
+            }
         }
         else {
-            return 0
+            return 1
         }
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "BusinessCell", for: indexPath) as! BusinessCell
-        cell.business = businesses[indexPath.row]
-        
-        return cell
+        if (businesses != nil && businesses.count > 0) {
+            let cell = tableView.dequeueReusableCell(withIdentifier: "BusinessCell", for: indexPath) as! BusinessCell
+            cell.business = businesses[indexPath.row]
+            return cell
+            
+        } else {
+            self.tableView.pullToRefreshView.stopAnimating()
+            let cell = tableView.dequeueReusableCell(withIdentifier: "EmptyCell", for: indexPath)
+            cell.textLabel?.text = !isLoading ? "No Results Found. Retry with a less restrictive filter" : ""
+            self.tableView.pullToRefreshView.stopAnimating()
+            return cell
+        }
     }
     
     // MARK: - Searchbar
@@ -107,7 +119,7 @@ class BusinessesViewController: UIViewController, UITableViewDelegate, UITableVi
                                 distance: distance,
                                 offset: 0,  completion:
             { (businesses: [Business]?, error: Error?) -> Void in
-                self.businesses = businesses!
+                self.businesses = businesses
                 self.tableView.reloadData()
         })
     }
@@ -138,7 +150,7 @@ class BusinessesViewController: UIViewController, UITableViewDelegate, UITableVi
                                     }
                                     
                                     self.isLoading = false
-                                    MBProgressHUD.hideAllHUDs(for: self.view, animated: true);
+                                    MBProgressHUD.hide(for: self.view, animated: true)
                                     self.tableView.pullToRefreshView.stopAnimating()
                                     self.tableView.infiniteScrollingView.stopAnimating()
                                     self.tableView.reloadData()

@@ -97,7 +97,6 @@ class YelpClient: BDBOAuth1RequestOperationManager, CLLocationManagerDelegate {
                             if let response = response as? [String: Any]{
                                 let dictionaries = response["businesses"] as? [NSDictionary]
                                 if dictionaries != nil {
-                                    print(dictionaries)
                                     completion(Business.businesses(array: dictionaries!), nil)
                                 }
                             }

@@ -122,6 +122,14 @@
                                             <outlet property="thumbImageView" destination="H57-Cl-uLp" id="I47-Ju-zuf"/>
                                         </connections>
                                     </tableViewCell>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="EmptyCell" id="BEN-GA-mEF">
+                                        <rect key="frame" x="0.0" y="123" width="375" height="91"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="BEN-GA-mEF" id="Rvb-eb-TS8">
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="91"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
                                 </prototypes>
                             </tableView>
                         </subviews>
@@ -154,24 +162,6 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Fgb-4b-F1b" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2727.1999999999998" y="357.57121439280365"/>
-        </scene>
-        <!--View Controller-->
-        <scene sceneID="hpD-mC-IHW">
-            <objects>
-                <viewController id="uYp-qM-0Ox" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="iG3-iZ-2SH"/>
-                        <viewControllerLayoutGuide type="bottom" id="Jr2-Rw-7CE"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="4Og-7k-XIa">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                    </view>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="Toe-sg-7sZ" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="3706" y="-461"/>
         </scene>
         <!--Filters-->
         <scene sceneID="eAW-Iv-IxV">
@@ -428,7 +418,7 @@
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="0gQ-6z-oRJ" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="ZqM-9S-Guz">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="ZqM-9S-Guz">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="barTintColor" red="0.87058823529999996" green="0.22352941179999999" blue="0.18039215689999999" alpha="1" colorSpace="calibratedRGB"/>
@@ -447,7 +437,7 @@
         <image name="down-arrow" width="64" height="64"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="mnV-6z-lUr"/>
+        <segue reference="4rh-PC-PVt"/>
     </inferredMetricsTieBreakers>
     <color key="tintColor" red="0.87058823529411766" green="0.22352941176470587" blue="0.1803921568627451" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
 </document>
