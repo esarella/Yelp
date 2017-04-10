@@ -13,7 +13,7 @@ protocol CustomCellDelegate: class {
 }
 
 class CustomCell: UITableViewCell {
-
+    
     @IBOutlet weak var switchLabel: UILabel!
     @IBOutlet weak var onSwitch: CustomButton!
     
@@ -31,5 +31,5 @@ class CustomCell: UITableViewCell {
     func buttonIsChecked() -> Bool {
         return onSwitch.isChecked
     }
-
+    
 }

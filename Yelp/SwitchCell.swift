@@ -13,13 +13,13 @@ import UIKit
 }
 
 class SwitchCell: UITableViewCell {
-
+    
     @IBOutlet weak var switchLabel: UILabel!
     @IBOutlet weak var onSwitch: UISwitch!
     
     weak var delegate: SwitchCellDelegate?
     
     @IBAction func switchValueChange(_ sender: Any) {
-            delegate?.switchCell?(switchCell: self, didChangeValue: onSwitch.isOn)
-        }
+        delegate?.switchCell?(switchCell: self, didChangeValue: onSwitch.isOn)
+    }
 }

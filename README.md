@@ -2,7 +2,7 @@
 
 **Yelp** is a Yelp search app using the [Yelp API](http://www.yelp.com/developers/documentation/v2/search_api).
 
-Time spent: **16** hours spent in total
+Time spent: **18** hours spent in total
 
 ## User Stories
 
@@ -36,8 +36,14 @@ The following **additional** features are implemented:
 
 Please list two areas of the assignment you'd like to **discuss further with your peers** during the next class (examples include better ways to implement something, how to extend your app in certain ways, etc):
 
-1.
-2.
+1.  If a method has AnyObject as a return type  why does it force me to return all params as anyObject type
+    static func distanceOptions() -> [String:AnyObject] {
+        return ["name": "Auto" as AnyObject, "meters": maxDistance as AnyObject]
+     }
+     
+     Why is name being forced to typecast as anyObject when it is a String, is it because it is Part of a dictionary?
+
+2.  I spent a lot of time wasting on message passing between classes. It seems like 
 
 ## Video Walkthrough
 

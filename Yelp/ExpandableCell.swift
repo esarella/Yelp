@@ -11,16 +11,13 @@ import UIKit
 class ExpandableCell: UITableViewCell {
 
     @IBOutlet weak var expandableCellLabel: UILabel!
-    override func awakeFromNib() {
-        super.awakeFromNib()
-        // Initialization code
-    }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
 
         self.layer.cornerRadius = 5
         self.layer.borderWidth = 1
-        self.layer.borderColor = UIColor.lightGray.cgColor    }
+        self.layer.borderColor = UIColor.lightGray.cgColor
+    }
 
 }

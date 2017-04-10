@@ -25,8 +25,8 @@ enum YelpSortMode: Int {
 class YelpClient: BDBOAuth1RequestOperationManager, CLLocationManagerDelegate {
     var accessToken: String!
     var accessSecret: String!
-//    var latitude: CLLocationDegrees! = 37.41718486437331
-//    var longitude: CLLocationDegrees! = -122.07032797130279
+    //    var latitude: CLLocationDegrees! = 37.41718486437331
+    //    var longitude: CLLocationDegrees! = -122.07032797130279
     
     //MARK: Shared Instance
     
@@ -35,13 +35,13 @@ class YelpClient: BDBOAuth1RequestOperationManager, CLLocationManagerDelegate {
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         
-//        let locationManager = CLLocationManager()
-//        locationManager.delegate = self;
-//        locationManager.desiredAccuracy = kCLLocationAccuracyBest
-//        locationManager.requestAlwaysAuthorization()
-//        locationManager.startUpdatingLocation()
-//        latitude = locationManager.location?.coordinate.latitude
-//        longitude = locationManager.location?.coordinate.longitude
+        //        let locationManager = CLLocationManager()
+        //        locationManager.delegate = self;
+        //        locationManager.desiredAccuracy = kCLLocationAccuracyBest
+        //        locationManager.requestAlwaysAuthorization()
+        //        locationManager.startUpdatingLocation()
+        //        latitude = locationManager.location?.coordinate.latitude
+        //        longitude = locationManager.location?.coordinate.longitude
         
     }
     

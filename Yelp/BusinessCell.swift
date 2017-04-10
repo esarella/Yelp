@@ -9,7 +9,7 @@
 import UIKit
 
 class BusinessCell: UITableViewCell {
-
+    
     @IBOutlet weak var thumbImageView: UIImageView!
     @IBOutlet weak var ratingsImageView: UIImageView!
     @IBOutlet weak var nameLabel: UILabel!
@@ -25,7 +25,6 @@ class BusinessCell: UITableViewCell {
                 thumbImageView.setImageWith(business.imageURL!)
             }
             
-//            thumbImageView.setImageWith((business.imageURL ?? nil)!)
             ratingsImageView.setImageWith(business.ratingImageURL!)
             nameLabel.text = business.name
             distanceLabel.text = business.distance
@@ -48,5 +47,5 @@ class BusinessCell: UITableViewCell {
         super.layoutSubviews()
         nameLabel.preferredMaxLayoutWidth = nameLabel.frame.size.width
     }
-
+    
 }

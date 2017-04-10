@@ -15,13 +15,8 @@ class BusinessesViewController: UIViewController, UITableViewDelegate, UITableVi
     
     var businesses: [Business]!
     var searchBar: UISearchBar!
-
-    
-    // Infinite loading variables
     var isLoading = false
-//    var offset: Int = 0
-//    var limit: Int = 20 // Default Yelp limit
-    
+    var offset: Int = 0
     
     @IBOutlet weak var tableView: UITableView!
     
@@ -35,7 +30,7 @@ class BusinessesViewController: UIViewController, UITableViewDelegate, UITableVi
         searchBar.sizeToFit()
         navigationItem.titleView = searchBar
         searchBar.delegate = self
-
+        
         tableView.dataSource = self
         tableView.delegate = self
         tableView.rowHeight = UITableViewAutomaticDimension
@@ -46,9 +41,9 @@ class BusinessesViewController: UIViewController, UITableViewDelegate, UITableVi
         
         self.tableView.pullToRefreshView.arrowColor = UIColor(red: 0.82, green: 0.13, blue: 0.13, alpha: 1)
         self.tableView.pullToRefreshView.textColor = UIColor(red: 0.82, green: 0.13, blue: 0.13, alpha: 1)
-//        self.tableView.backgroundColor = UIColor.init(patternImage: #imageLiteral(resourceName: "down-arrow"))
-
-
+        //        self.tableView.backgroundColor = UIColor.init(patternImage: #imageLiteral(resourceName: "down-arrow"))
+        
+        
         tableView.addInfiniteScrolling(actionHandler: { [weak self] in
             self?.doSearchWithOffset(self?.businesses?.count ?? 0, newSearch: false)
         })
@@ -82,7 +77,7 @@ class BusinessesViewController: UIViewController, UITableViewDelegate, UITableVi
         })
     }
     
-     // MARK: - Navigation
+    // MARK: - Navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         
         let navigationController = segue.destination as! UINavigationController
@@ -90,7 +85,7 @@ class BusinessesViewController: UIViewController, UITableViewDelegate, UITableVi
         {
             let filtersViewController = navigationController.topViewController as! FiltersViewController
             filtersViewController.delegate = self
-
+            
         }
         else if (segue.identifier == "mapSegue")
         {
@@ -112,9 +107,9 @@ class BusinessesViewController: UIViewController, UITableViewDelegate, UITableVi
                                 distance: distance,
                                 offset: 0,  completion:
             { (businesses: [Business]?, error: Error?) -> Void in
-            self.businesses = businesses!
-            self.tableView.reloadData()
-            })
+                self.businesses = businesses!
+                self.tableView.reloadData()
+        })
     }
     
     fileprivate func doNewSearch() {
@@ -134,16 +129,9 @@ class BusinessesViewController: UIViewController, UITableViewDelegate, UITableVi
                                         if newSearch {
                                             self.businesses = businesses
                                             
-                                            for business in businesses {
-//                                                let coordinate = CLLocationCoordinate2DMake(business.latitude, business.longitude)
-//                                                self.addAnnotationAtCoordinate(coordinate, title: business.name, address: business.address)
-                                            }
-                                            
                                         } else {
                                             for business in businesses {
                                                 self.businesses.append(business)
-//                                                let coordinate = CLLocationCoordinate2DMake(business.latitude, business.longitude)
-//                                                self.addAnnotationAtCoordinate(coordinate, title: business.name, address: business.address)
                                             }
                                         }
                                         
@@ -154,11 +142,8 @@ class BusinessesViewController: UIViewController, UITableViewDelegate, UITableVi
                                     self.tableView.pullToRefreshView.stopAnimating()
                                     self.tableView.infiniteScrollingView.stopAnimating()
                                     self.tableView.reloadData()
-
-
-
         })
     }
-
+    
     
 }

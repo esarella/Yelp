@@ -13,17 +13,17 @@ protocol FiltersViewControllerDelegate: class {
 }
 
 class FiltersViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, SwitchCellDelegate {
-
+    
     @IBOutlet weak var tableView: UITableView!
-
+    
     var switchStates = [Int: Bool]()
     weak var delegate: FiltersViewControllerDelegate?
-
+    
     // List variables
     var categories: [[String: String]]!
     var distances: [[String: AnyObject]]!
     var sorts: [[String: AnyObject]]!
-
+    
     // State variables
     var deals: Bool = false
     var distanceStates: [Int: Bool] = [0: true]
@@ -31,18 +31,18 @@ class FiltersViewController: UIViewController, UITableViewDelegate, UITableViewD
     var sortStates: [Int: Bool] = [0: true]
     // Default to Best Matched
     var categoryStates: [Int: Bool] = [:]
-
+    
     // Expand variables
     var distanceExpanded: Bool = false
     var sortExpanded: Bool = false
     var categoriesExpanded: Bool = false
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         tableView.delegate = self
         tableView.dataSource = self
-
+        
         distances = SearchSettings.distanceOptions()
         sorts = SearchSettings.sortOptions()
         categories = SearchSettings.yelpCategories()
@@ -51,22 +51,22 @@ class FiltersViewController: UIViewController, UITableViewDelegate, UITableViewD
     override func viewWillDisappear(_ animated: Bool) {
         SearchSettings.sharedInstance.resetFiltersForNewSearch()
     }
-
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-
+    
     @IBAction func onCancel(_ sender: Any) {
-
+        
         dismiss(animated: true, completion: nil)
     }
-
-
+    
+    
     @IBAction func onSearch(_ sender: Any) {
         // Deals
         SearchSettings.sharedInstance.deals = deals
-
+        
         // Sort
         SearchSettings.sharedInstance.sort = YelpSortMode.bestMatched
         for (row, isSelected) in sortStates {
@@ -75,7 +75,7 @@ class FiltersViewController: UIViewController, UITableViewDelegate, UITableViewD
                 break
             }
         }
-
+        
         // Distance
         SearchSettings.sharedInstance.distance = maxDistance
         for (row, isSelected) in distanceStates {
@@ -84,7 +84,7 @@ class FiltersViewController: UIViewController, UITableViewDelegate, UITableViewD
                 break
             }
         }
-
+        
         // Categories
         var selectedCategories = [String]()
         for (row, isSelected) in categoryStates {
@@ -92,20 +92,20 @@ class FiltersViewController: UIViewController, UITableViewDelegate, UITableViewD
                 selectedCategories.append(categories[row]["code"]!)
             }
         }
-
+        
         if selectedCategories.count > 0 {
             SearchSettings.sharedInstance.categories = selectedCategories
         }
-
+        
         delegate?.filtersViewController(filtersViewController: self, didUpdateFilters: SearchSettings.sharedInstance)
         dismiss(animated: true, completion: nil)
-
+        
     }
-
+    
     func numberOfSections(in tableView: UITableView) -> Int {
         return 4
     }
-
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         switch FilterSection(rawValue: section)! {
         case FilterSection.distance:
@@ -117,9 +117,9 @@ class FiltersViewController: UIViewController, UITableViewDelegate, UITableViewD
         case FilterSection.deals:
             return 1
         }
-
+        
     }
-
+    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         switch FilterSection(rawValue: indexPath.section)! {
         case FilterSection.deals:
@@ -128,7 +128,7 @@ class FiltersViewController: UIViewController, UITableViewDelegate, UITableViewD
             cell.delegate = self
             cell.onSwitch.isOn = false
             return cell
-
+            
         case FilterSection.distance:
             if !distanceExpanded && 0 == indexPath.row {
                 let cell = tableView.dequeueReusableCell(withIdentifier: "ExpandableCell", for: indexPath) as! ExpandableCell
@@ -140,15 +140,15 @@ class FiltersViewController: UIViewController, UITableViewDelegate, UITableViewD
                 }
                 return cell
             }
-
+            
             let cell = tableView.dequeueReusableCell(withIdentifier: "SwitchCell", for: indexPath) as! SwitchCell
-//            let cell = tableView.dequeueReusableCell(withIdentifier: "CustomCell", for: indexPath) as! CustomCell
+            //            let cell = tableView.dequeueReusableCell(withIdentifier: "CustomCell", for: indexPath) as! CustomCell
             cell.switchLabel.text = distances[indexPath.row]["name"] as? String
-//            cell.onSwitch.isChecked = distanceStates[indexPath.row] ?? false
+            //            cell.onSwitch.isChecked = distanceStates[indexPath.row] ?? false
             cell.delegate = self
             cell.onSwitch.isOn = distanceStates[indexPath.row] ?? false
             return cell
-
+            
         case FilterSection.sort:
             if !sortExpanded && 0 == indexPath.row {
                 let cell = tableView.dequeueReusableCell(withIdentifier: "ExpandableCell", for: indexPath) as! ExpandableCell
@@ -160,21 +160,21 @@ class FiltersViewController: UIViewController, UITableViewDelegate, UITableViewD
                 }
                 return cell
             }
-
-//            let cell = tableView.dequeueReusableCell(withIdentifier: "CustomCell", for: indexPath) as! CustomCell
+            
+            //            let cell = tableView.dequeueReusableCell(withIdentifier: "CustomCell", for: indexPath) as! CustomCell
             let cell = tableView.dequeueReusableCell(withIdentifier: "SwitchCell", for: indexPath) as! SwitchCell
             cell.switchLabel.text = sorts[indexPath.row]["name"] as? String
             cell.delegate = self
-//            cell.onSwitch.isChecked = sortStates[indexPath.row] ?? false
+            //            cell.onSwitch.isChecked = sortStates[indexPath.row] ?? false
             cell.onSwitch.isOn = sortStates[indexPath.row] ?? false
             return cell
-
+            
         case FilterSection.categories:
             if !categoriesExpanded && 4 == indexPath.row {
                 let cell = tableView.dequeueReusableCell(withIdentifier: "SeeAllCell", for: indexPath)
                 return cell
             }
-
+            
             let cell = tableView.dequeueReusableCell(withIdentifier: "SwitchCell", for: indexPath) as! SwitchCell
             cell.switchLabel.text = categories[indexPath.row]["name"]
             cell.delegate = self
@@ -182,8 +182,8 @@ class FiltersViewController: UIViewController, UITableViewDelegate, UITableViewD
             return cell
         }
     }
-
-
+    
+    
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         switch FilterSection(rawValue: section)! {
         case FilterSection.distance:
@@ -197,59 +197,59 @@ class FiltersViewController: UIViewController, UITableViewDelegate, UITableViewD
         }
     }
     
-
+    
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 50
     }
-
+    
     func switchCell(switchCell: SwitchCell, didChangeValue value: Bool) {
         let indexPath = tableView.indexPath(for: switchCell)!
-
+        
         switch FilterSection(rawValue:indexPath.section)! {
         case FilterSection.deals:
             deals = value
-
+            
         case FilterSection.distance:
             distanceStates = [:] // Reset distance states
             distanceStates[indexPath.row] = value
             distanceExpanded = false
             tableView.reloadSections(NSIndexSet(index: FilterSection.distance.rawValue) as IndexSet, with: .none)
-
+            
         case FilterSection.sort:
             sortStates = [:] // Reset sort states
             sortStates[indexPath.row] = value
             sortExpanded = false
             tableView.reloadSections(NSIndexSet(index: FilterSection.sort.rawValue) as IndexSet, with: .none)
-
+            
         case FilterSection.categories:
             categoryStates[indexPath.row] = value
         }
     }
     
-//    func customCell(customCell: CustomCell, didChangeValue value: Bool) {
-//        let indexPath = self.tableView.indexPath(for: customCell)!
-//
-//        switch FilterSection(rawValue:indexPath.section)! {
-//            case FilterSection.deals:
-//            deals = value
-//
-//            case FilterSection.distance:
-//            distanceStates = [:] // Reset distance states
-//            distanceStates[indexPath.row] = value
-//            distanceExpanded = false
-//            tableView.reloadSections(NSIndexSet(index: FilterSection.distance.rawValue) as IndexSet, with: .none)
-//
-//            case FilterSection.sort:
-//            sortStates = [:] // Reset sort states
-//            sortStates[indexPath.row] = value
-//            sortExpanded = false
-//            tableView.reloadSections(NSIndexSet(index: FilterSection.sort.rawValue) as IndexSet, with: .none)
-//
-//            case FilterSection.categories:
-//            categoryStates[indexPath.row] = value
-//            }
-//    }
-
+    //    func customCell(customCell: CustomCell, didChangeValue value: Bool) {
+    //        let indexPath = self.tableView.indexPath(for: customCell)!
+    //
+    //        switch FilterSection(rawValue:indexPath.section)! {
+    //            case FilterSection.deals:
+    //            deals = value
+    //
+    //            case FilterSection.distance:
+    //            distanceStates = [:] // Reset distance states
+    //            distanceStates[indexPath.row] = value
+    //            distanceExpanded = false
+    //            tableView.reloadSections(NSIndexSet(index: FilterSection.distance.rawValue) as IndexSet, with: .none)
+    //
+    //            case FilterSection.sort:
+    //            sortStates = [:] // Reset sort states
+    //            sortStates[indexPath.row] = value
+    //            sortExpanded = false
+    //            tableView.reloadSections(NSIndexSet(index: FilterSection.sort.rawValue) as IndexSet, with: .none)
+    //
+    //            case FilterSection.categories:
+    //            categoryStates[indexPath.row] = value
+    //            }
+    //    }
+    
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         if " " != self.tableView(tableView, titleForHeaderInSection: section) {
             return 45
@@ -293,5 +293,5 @@ class FiltersViewController: UIViewController, UITableViewDelegate, UITableViewD
         headerView.addSubview(label)
         return headerView
     }
-
+    
 }

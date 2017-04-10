@@ -9,7 +9,7 @@
 import UIKit
 
 class CustomButton: UIButton {
-
+    
     let buttonOnState = #imageLiteral(resourceName: "onButton")
     let buttonOffState = #imageLiteral(resourceName: "offButton")
     
@@ -33,5 +33,5 @@ class CustomButton: UIButton {
             isChecked = !isChecked
         }
     }
-
+    
 }

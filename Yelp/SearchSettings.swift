@@ -12,7 +12,7 @@ enum FilterSection: Int {
     case deals = 0, distance, sort, categories
 }
 
-let maxDistance: Double = 40000
+let maxDistance: Double = 30000
 
 final class SearchSettings {
     
@@ -32,7 +32,7 @@ final class SearchSettings {
         self.sort = sort
     }
     
-    // Reset filters to default values - this is the assumed behavior with a new search term
+    // Clear filters so that values are not cached
     func resetFiltersForNewSearch() {
         categories = []
         deals = false
@@ -41,6 +41,7 @@ final class SearchSettings {
     }
     
     static func distanceOptions() -> [[String:AnyObject]] {
+        //Converting everything to miles to Make it work with the APi
         let metersPerMile = 1/0.000621371
         return [["name": "Auto" as AnyObject, "meters": maxDistance as AnyObject],
                 ["name": "0.3 miles" as AnyObject, "meters": 0.3 * metersPerMile as AnyObject],
@@ -229,5 +230,5 @@ final class SearchSettings {
                 ["name" : "Wraps", "code": "wraps"],
                 ["name" : "Yugoslav", "code": "yugoslav"]]
     }
-
+    
 }
