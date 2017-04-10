@@ -57,7 +57,7 @@ Can we pass objects in a traditional Object orient way (like Java) without using
 
 Here's a walkthrough of implemented user stories:
 
-<img src='http://i.imgur.com/rmd41hP.gifv' title='Yelp Walkthrough' width='' alt='Yelp Walkthrough' />
+<img src='http://i.imgur.com/cmym9Ic.gif' title='Yelp Walkthrough' width='' alt='Yelp Walkthrough' />
 <img src='http://i.imgur.com/cmym9Ic.gif' title='Filters' width='' alt='Filters' />
 <img src='http://i.imgur.com/iRoQUwH.gif' title='Auto Layout' width='' alt='Auto Layout' />
 <img src='http://i.imgur.com/d4nuVgs.gif' title='Experimental incomplete features' width='' alt='Experimental incomplete features' />

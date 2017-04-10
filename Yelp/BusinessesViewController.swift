@@ -73,7 +73,7 @@ class BusinessesViewController: UIViewController, UITableViewDelegate, UITableVi
         } else {
             self.tableView.pullToRefreshView.stopAnimating()
             let cell = tableView.dequeueReusableCell(withIdentifier: "EmptyCell", for: indexPath)
-            cell.textLabel?.text = !isLoading ? "No Results Found. Retry with a less restrictive filter" : ""
+            cell.textLabel?.text = !isLoading ? "No Results Found. Use a less restrictive filter" : ""
             self.tableView.pullToRefreshView.stopAnimating()
             return cell
         }
