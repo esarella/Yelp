@@ -20,19 +20,6 @@ class SwitchCell: UITableViewCell {
     weak var delegate: SwitchCellDelegate?
     
     @IBAction func switchValueChange(_ sender: Any) {
-        
-
             delegate?.switchCell?(switchCell: self, didChangeValue: onSwitch.isOn)
-        }    
-    override func awakeFromNib() {
-        super.awakeFromNib()
-        // Initialization code
-    }
-
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-
-        // Configure the view for the selected state
-    }
-
+        }
 }

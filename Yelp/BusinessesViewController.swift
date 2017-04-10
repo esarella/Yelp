@@ -46,6 +46,7 @@ class BusinessesViewController: UIViewController, UITableViewDelegate, UITableVi
         
         self.tableView.pullToRefreshView.arrowColor = UIColor(red: 0.82, green: 0.13, blue: 0.13, alpha: 1)
         self.tableView.pullToRefreshView.textColor = UIColor(red: 0.82, green: 0.13, blue: 0.13, alpha: 1)
+//        self.tableView.backgroundColor = UIColor.init(patternImage: #imageLiteral(resourceName: "down-arrow"))
 
 
         tableView.addInfiniteScrolling(actionHandler: { [weak self] in
@@ -83,10 +84,18 @@ class BusinessesViewController: UIViewController, UITableViewDelegate, UITableVi
     
      // MARK: - Navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        let navigationController = segue.destination as! UINavigationController
-        let filtersViewController = navigationController.topViewController as! FiltersViewController
         
-        filtersViewController.delegate = self
+        let navigationController = segue.destination as! UINavigationController
+        if (segue.identifier == "filterSegue")
+        {
+            let filtersViewController = navigationController.topViewController as! FiltersViewController
+            filtersViewController.delegate = self
+
+        }
+        else if (segue.identifier == "mapSegue")
+        {
+            let mapViewController = navigationController.topViewController as! MapViewController
+        }
     }
     
     func filtersViewController(filtersViewController: FiltersViewController, didUpdateFilters filters: SearchSettings) {

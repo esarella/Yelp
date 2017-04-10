@@ -142,7 +142,9 @@ class FiltersViewController: UIViewController, UITableViewDelegate, UITableViewD
             }
 
             let cell = tableView.dequeueReusableCell(withIdentifier: "SwitchCell", for: indexPath) as! SwitchCell
+//            let cell = tableView.dequeueReusableCell(withIdentifier: "CustomCell", for: indexPath) as! CustomCell
             cell.switchLabel.text = distances[indexPath.row]["name"] as? String
+//            cell.onSwitch.isChecked = distanceStates[indexPath.row] ?? false
             cell.delegate = self
             cell.onSwitch.isOn = distanceStates[indexPath.row] ?? false
             return cell
@@ -159,9 +161,11 @@ class FiltersViewController: UIViewController, UITableViewDelegate, UITableViewD
                 return cell
             }
 
+//            let cell = tableView.dequeueReusableCell(withIdentifier: "CustomCell", for: indexPath) as! CustomCell
             let cell = tableView.dequeueReusableCell(withIdentifier: "SwitchCell", for: indexPath) as! SwitchCell
             cell.switchLabel.text = sorts[indexPath.row]["name"] as? String
             cell.delegate = self
+//            cell.onSwitch.isChecked = sortStates[indexPath.row] ?? false
             cell.onSwitch.isOn = sortStates[indexPath.row] ?? false
             return cell
 
@@ -222,6 +226,30 @@ class FiltersViewController: UIViewController, UITableViewDelegate, UITableViewD
         }
     }
     
+//    func customCell(customCell: CustomCell, didChangeValue value: Bool) {
+//        let indexPath = self.tableView.indexPath(for: customCell)!
+//
+//        switch FilterSection(rawValue:indexPath.section)! {
+//            case FilterSection.deals:
+//            deals = value
+//
+//            case FilterSection.distance:
+//            distanceStates = [:] // Reset distance states
+//            distanceStates[indexPath.row] = value
+//            distanceExpanded = false
+//            tableView.reloadSections(NSIndexSet(index: FilterSection.distance.rawValue) as IndexSet, with: .none)
+//
+//            case FilterSection.sort:
+//            sortStates = [:] // Reset sort states
+//            sortStates[indexPath.row] = value
+//            sortExpanded = false
+//            tableView.reloadSections(NSIndexSet(index: FilterSection.sort.rawValue) as IndexSet, with: .none)
+//
+//            case FilterSection.categories:
+//            categoryStates[indexPath.row] = value
+//            }
+//    }
+
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         if " " != self.tableView(tableView, titleForHeaderInSection: section) {
             return 45
@@ -260,6 +288,7 @@ class FiltersViewController: UIViewController, UITableViewDelegate, UITableViewD
         let headerView = UIView(frame: CGRect(origin: CGPoint(x: 0, y: 0), size: CGSize(width: self.view.frame.width, height: 45)))
         headerView.backgroundColor = UIColor.white
         let label = UILabel(frame: CGRect(x: 0, y: 10, width: self.view.frame.width, height: 30))
+        label.font = UIFont.systemFont(ofSize: 20, weight: UIFontWeightSemibold)
         label.text = self.tableView(tableView, titleForHeaderInSection: section)
         headerView.addSubview(label)
         return headerView
