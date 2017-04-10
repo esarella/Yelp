@@ -33,6 +33,7 @@ The following **optional** features are implemented:
 The following **additional** features are implemented:
 
 - [X] Pull to Refresh
+- [X] Progress Indicator
 - Custom button, and mapview were partially implemented
 
 Please list two areas of the assignment you'd like to **discuss further with your peers** during the next class (examples include better ways to implement something, how to extend your app in certain ways, etc):
