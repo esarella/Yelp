@@ -2,7 +2,7 @@
 
 **Yelp** is a Yelp search app using the [Yelp API](http://www.yelp.com/developers/documentation/v2/search_api).
 
-Time spent: **18** hours spent in total
+Time spent: **19** hours spent in total
 
 ## User Stories
 
@@ -33,6 +33,7 @@ The following **optional** features are implemented:
 The following **additional** features are implemented:
 
 - [X] Pull to Refresh
+- Custom button, and mapview were partially implemented
 
 Please list two areas of the assignment you'd like to **discuss further with your peers** during the next class (examples include better ways to implement something, how to extend your app in certain ways, etc):
 
@@ -40,26 +41,36 @@ Please list two areas of the assignment you'd like to **discuss further with you
     static func distanceOptions() -> [String:AnyObject] {
         return ["name": "Auto" as AnyObject, "meters": maxDistance as AnyObject]
      }
-     
+
      Why is name being forced to typecast as anyObject when it is a String, is it because it is Part of a dictionary?
 
-2.  I spent a lot of time wasting on message passing between classes. It seems like 
+2.  I wasted a lot of time on message passing between classes, conforming to the protocol and debugging for errors.
+ It felt like I spent a lot of time on the plumbing rather than on the features I would have liked to finish.
+
+  Even though I trust Crusty, I have the following questions
+
+Is protocol oriented programming better than object oriented programming with respect to message passing?
+Can we pass objects in a traditional Object orient way (like Java) without using protocols in swift, especially in iOS?
 
 ## Video Walkthrough
 
 Here's a walkthrough of implemented user stories:
 
-<img src='http://i.imgur.com/link/to/your/gif/file.gif' title='Video Walkthrough' width='' alt='Video Walkthrough' />
+<img src='http://i.imgur.com/rmd41hP.gif' title='Video Walkthrough' width='' alt='Video Walkthrough' />
+<img src='http://i.imgur.com/cmym9Ic.gif' title='Filters' width='' alt='Filters' />
+<img src='http://i.imgur.com/iRoQUwH.gif' title='Auto Layout' width='' alt='Auto Layout' />
+<img src='http://i.imgur.com/d4nuVgs.gif' title='Experimental incomplete features' width='' alt='Experimental incomplete features' />
 
 GIF created with [LiceCap](http://www.cockos.com/licecap/).
 
 ## Notes
 
-Describe any challenges encountered while building the app.
+Passing AnyObject type object with delegate patterns caused a lot of errors. spent most of my time fixing and debugging those.
+SevenButton was not easy to use or well documented. I tries to implement my own custom button which I was not able to finish.
 
 ## License
 
-Copyright [yyyy] [name of copyright owner]
+Copyright [2017] [Emmanuel Sarella]
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
